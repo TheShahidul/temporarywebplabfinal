@@ -1,0 +1,31 @@
+.container {
+    padding: 20px;
+    border-radius: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.container h1 {
+    text-align: center;
+}
+label {
+    font-weight: bold;
+}
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+button {
+    padding: 10px 20px;
+    background-color: #3f796c;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#output {
+    margin-top: 20px;
+    padding-top: 20px;
+}

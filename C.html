@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Solver</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lab Report 3</h1>
+        <div>
+            <label for="problem">Select a problem:</label>
+            <select id="problem">
+                <option value="1">1. Check Prime number</option>
+                <option value="2">2. Factorial</option>
+                <option value="3">3. Fibonacci</option>
+                <option value="4">4. Sorting</option>
+                <option value="5">5. Maximum & minimum</option>
+                <option value="6">6. Odd Even</option>
+                <option value="7">7. Palindrome</option>
+                <option value="8">8. Make uppercase first letter of each word</option>
+                <option value="9">9. Make uppercase last letter each word</option>
+                <option value="10">10. Make uppercase middle letter each word</option>
+                <option value="11">11. Frequency of letter in a word or sentence.</option>
+                <option value="12">12. Leap year</option>
+                <option value="13">13. Swapping</option>
+                <option value="14">14. Vowel Consonant</option>
+            </select>
+        </div>
+        <div>
+            <label for="input">Enter input:</label>
+        </div>
+        <input type="text" id="input">
+        <button onclick="solveProblem()">Solve</button>
+        <div id="output"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
