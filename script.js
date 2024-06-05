@@ -1,160 +1,182 @@
-function isPrime(num) {
-    if (num <= 1) return false;
-    if (num <= 3) return true;
-    if (num % 2 === 0 || num % 3 === 0) return false;
-    for (let i = 5; i * i <= num; i += 6) {
-        if (num % i === 0 || num % (i + 2) === 0) return false;
+// 1. Prime number or not
+function isPrime(number) {
+    if (number <= 1) return false;
+    if (number <= 3) return true;
+
+    if (number % 2 === 0 || number % 3 === 0) return false;
+
+    for (let i = 5; i * i <= number; i += 6) {
+        if (number % i === 0 || number % (i + 2) === 0) return false;
     }
+
     return true;
 }
 
+// 2. Factorial 
 function factorial(n) {
     if (n === 0 || n === 1) return 1;
     return n * factorial(n - 1);
 }
 
+// 3. Fibonacci 
 function fibonacci(n) {
-    let fibSeries = [0, 1];
-    for (let i = 2; i < n; i++) {
-        fibSeries[i] = fibSeries[i - 1] + fibSeries[i - 2];
-    }
-    return fibSeries.slice(0, n);
+    if (n <= 1) return n;
+    return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
+// 4. Sorting
 function sortArray(arr) {
-    const n = arr.length;
-    for (let i = 0; i < n - 1; i++) {
-        for (let j = 0; j < n - i - 1; j++) {
-            if (arr[j] > arr[j + 1]) {
-                let temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
-            }
-        }
-    }
-    return arr;
+    return arr.sort((a, b) => a - b);
 }
 
+// 5. Maximum - minimum 
 function findMinMax(arr) {
-    if (arr.length === 0) {
-        return "Array is empty.";
-    }
-    let min = arr[0];
-    let max = arr[0];
-    for (let i = 1; i < arr.length; i++) {
-        if (arr[i] < min) {
-            min = arr[i];
-        }
-        if (arr[i] > max) {
-            max = arr[i];
-        }
-    }
-    return { min, max };
+    return {
+        min: Math.min(...arr),
+        max: Math.max(...arr)
+    };
 }
 
-function checkOddEven(num) {
-    return num % 2 === 0 ? 'Even' : 'Odd';
+// 6. Odd Even 
+function isOddOrEven(number) {
+    return number % 2 === 0 ? "Even" : "Odd";
 }
 
+// 7. Palindrome (Digit + String) 
 function isPalindrome(str) {
-    const reversed = str.split('').reverse().join('');
+    const reversed = str.split("").reverse().join("");
     return str === reversed;
 }
 
+// 8. Make uppercase of each first letter of each word (FIRST) 
 function capitalizeFirstLetter(str) {
     return str.replace(/\b\w/g, char => char.toUpperCase());
 }
-
+// 9. Make uppercase of each letter of each word (LAST) 
 function capitalizeLastLetter(str) {
     return str.replace(/\b\w+\b/g, word => word.slice(0, -1) + word.slice(-1).toUpperCase());
 }
-
+// 10. Make uppercase of each letter of each word (MIDDLE)
 function capitalizeMiddleLetter(str) {
-    return str.replace(/\b\w+\b/g, word => {
-        const midIndex = Math.floor(word.length / 2);
-        return word.slice(0, midIndex) + word.charAt(midIndex).toUpperCase() + word.slice(midIndex + 1);
-    });
+    return str.replace(/\b\w+\b/g, word => word.slice(0, Math.floor(word.length / 2)) +
+        word.slice(Math.floor(word.length / 2)).toUpperCase());
 }
 
-function countLetters(str) {
+// 11. Frequency of letter in a word or sentence. (letter & count)
+function letterFrequency(str) {
     const frequency = {};
-    for (let char of str) {
-        if (frequency[char]) {
-            frequency[char]++;
-        } else {
-            frequency[char] = 1;
+    for (const char of str) {
+        if (char.match(/[a-zA-Z]/)) {
+            frequency[char] = (frequency[char] || 0) + 1;
         }
     }
     return frequency;
 }
 
+// 12. Leap year 
 function isLeapYear(year) {
     return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
 }
 
-function swap(a, b) {
-    return [b, a];
+// 13. Series 
+function generateSeries(n) {
+    const series = [0, 1];
+    for (let i = 2; i < n; i++) {
+        series.push(series[i - 1] + series[i - 2]);
+    }
+    return series.slice(0, n);
 }
 
-function checkVowelConsonant(char) {
-    const vowels = ['a', 'e', 'i', 'o', 'u'];
-    return vowels.includes(char.toLowerCase()) ? 'Vowel' : 'Consonant';
+// 14. Swapping 
+function swapNumbers(a, b) {
+    [a, b] = [b, a];
+    return { a, b };
 }
 
+// 15. Vowel Consonant 
+function isVowelOrConsonant(char) {
+    return /^[aeiou]$/i.test(char) ? "Vowel" : "Consonant";
+}
+
+// Function to solve the selected problem
 function solveProblem() {
-    const problemSelect = document.getElementById("problem");
+    const problemSelect = document.getElementById('problemSelect');
     const selectedProblem = problemSelect.value;
-    const input = document.getElementById('input').value;
-    let output = "";
+    const outputDiv = document.getElementById('output');
+    outputDiv.innerHTML = ''; // Clear previous output
 
     switch (selectedProblem) {
-        case '1':
-            output = isPrime(parseInt(input)).toString();
+        case 'prime':
+            const primeNumber = parseInt(prompt("Enter a number to check if it's prime or not:"));
+            outputDiv.textContent = `Is ${primeNumber} prime? ${isPrime(primeNumber)}`;
             break;
-        case '2':
-            output = factorial(parseInt(input)).toString();
+        case 'factorial':
+            const factorialNumber = parseInt(prompt("Enter a number to find its factorial:"));
+            outputDiv.textContent = `Factorial of ${factorialNumber} is ${factorial(factorialNumber)}`;
             break;
-        case '3':
-            output = fibonacci(parseInt(input)).toString();
+        case 'fibonacci':
+            const fibonacciNumber = parseInt(prompt("Enter a number to find its Fibonacci value:"));
+            outputDiv.textContent = `Fibonacci value at position ${fibonacciNumber} is ${fibonacci(fibonacciNumber)}`;
             break;
-        case '4':
-            output = sortArray(input.split(",").map(Number)).toString();
+        case 'sort':
+            const arrToSort = prompt("Enter numbers separated by comma to sort:");
+            const sortedArr = sortArray(arrToSort.split(',').map(Number));
+            outputDiv.textContent = `Sorted Array: ${sortedArr}`;
             break;
-        case '5':
-            output = JSON.stringify(findMinMax(input.split(",").map(Number)));
+        case 'minMax':
+            const arrToFindMinMax = prompt("Enter numbers separated by comma to find min and max:");
+            const minMax = findMinMax(arrToFindMinMax.split(',').map(Number));
+            outputDiv.textContent = `Minimum: ${minMax.min}, Maximum: ${minMax.max}`;
             break;
-        case '6':
-            output = checkOddEven(parseInt(input));
+        case 'oddEven':
+            const oddEvenNumber = parseInt(prompt("Enter a number to check if it's Odd or Even:"));
+            outputDiv.textContent = `${oddEvenNumber} is ${isOddOrEven(oddEvenNumber)}`;
             break;
-        case '7':
-            output = isPalindrome(input).toString();
+        case 'palindrome':
+            const inputString = prompt("Enter a string to check if it's a palindrome:");
+            outputDiv.textContent = `Is ${inputString} a palindrome? ${isPalindrome(inputString)}`;
             break;
-        case '8':
-            output = capitalizeFirstLetter(input);
+        case 'capitalizeFirst':
+            const firstCapitalizeString = prompt("Enter a string to capitalize the first letter of each word:");
+            outputDiv.textContent = `Capitalized String: ${capitalizeFirstLetter(firstCapitalizeString)}`;
             break;
-        case '9':
-            output = capitalizeLastLetter(input);
+        case 'capitalizeLast':
+            const lastCapitalizeString = prompt("Enter a string to capitalize the last letter of each word:");
+            outputDiv.textContent = `Capitalized String: ${capitalizeLastLetter(lastCapitalizeString)}`;
             break;
-        case '10':
-            output = capitalizeMiddleLetter(input);
+        case 'capitalizeMiddle':
+            const middleCapitalizeString = prompt("Enter a string to capitalize the middle letter of each word:");
+            outputDiv.textContent = `Capitalized String: ${capitalizeMiddleLetter(middleCapitalizeString)}`;
             break;
-        case '11':
-            output = JSON.stringify(countLetters(input));
+        case 'letterFrequency':
+            const inputStr = prompt("Enter a string to find the frequency of letters:");
+            const frequencyObj = letterFrequency(inputStr);
+            let frequencyOutput = '';
+            for (const char in frequencyObj) {
+                frequencyOutput += `${char}: ${frequencyObj[char]}, `;
+            }
+            outputDiv.textContent = `Frequency of letters: ${frequencyOutput}`;
             break;
-        case '12':
-            output = isLeapYear(parseInt(input)).toString();
+        case 'leapYear':
+            const yearToCheck = parseInt(prompt("Enter a year to check if it's a leap year:"));
+            outputDiv.textContent = `${yearToCheck} is ${isLeapYear(yearToCheck) ? 'a leap' : 'not a leap'} year`;
             break;
-        case '13':
-            const [a, b] = input.split(",").map(Number);
-            output = swap(a, b).toString();
+        case 'series':
+            const seriesNumber = parseInt(prompt("Enter a number to generate the series:"));
+            outputDiv.textContent = `Generated Series: ${generateSeries(seriesNumber)}`;
             break;
-        case '14':
-            output = checkVowelConsonant(input);
+        case 'swap':
+            const numbersToSwap = prompt("Enter two numbers separated by comma to swap:");
+            const [num1, num2] = numbersToSwap.split(',').map(Number);
+            const swappedNumbers = swapNumbers(num1, num2);
+            outputDiv.textContent = `Swapped numbers: ${swappedNumbers.a}, ${swappedNumbers.b}`;
+            break;
+        case 'vowelConsonant':
+            const charToCheck = prompt("Enter a character to check if it's a vowel or consonant:");
+            outputDiv.textContent = `The character ${charToCheck} is ${isVowelOrConsonant(charToCheck)}`;
             break;
         default:
-            output = "Invalid choice.";
+            outputDiv.textContent = 'Invalid selection.';
             break;
     }
-
-    document.getElementById("output").innerText = output;
 }
